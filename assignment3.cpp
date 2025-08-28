@@ -113,30 +113,69 @@
 
 //Question 2
 
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// int main() {
+//     string str;
+//     cout << "Enter a string: ";
+//     cin >> str;
+
+//     stack<char> s;
+
+//     // Push each character onto stack
+//     for (char c : str) {
+//         s.push(c);
+//     }
+
+//     // Pop characters from stack to reverse
+//     string reversed = "";
+//     while (!s.empty()) {
+//         reversed += s.top();
+//         s.pop();
+//     }
+
+//     cout << "Reversed string: " << reversed << endl;
+//     return 0;
+// }
+
+// ===================================================================================================
+
+// Question 3
+
 #include <iostream>
 #include <stack>
 #include <string>
 using namespace std;
 
-int main() {
-    string str;
-    cout << "Enter a string: ";
-    cin >> str;
-
+bool isBalanced(string expr) {
     stack<char> s;
-
-    // Push each character onto stack
-    for (char c : str) {
-        s.push(c);
+    for (char c : expr) {
+        if (c == '(' || c == '{' || c == '[') {
+            s.push(c);
+        } else if (c == ')' || c == '}' || c == ']') {
+            if (s.empty()) return false;
+            char top = s.top();
+            s.pop();
+            if ((c == ')' && top != '(') ||
+                (c == '}' && top != '{') ||
+                (c == ']' && top != '[')) {
+                return false;
+            }
+        }
     }
+    return s.empty();
+}
 
-    // Pop characters from stack to reverse
-    string reversed = "";
-    while (!s.empty()) {
-        reversed += s.top();
-        s.pop();
-    }
-
-    cout << "Reversed string: " << reversed << endl;
+int main() {
+    string expr;
+    cout << "Enter an expression: ";
+    cin >> expr;
+    if (isBalanced(expr))
+        cout << "Balanced" << endl;
+    else
+        cout << "Not Balanced" << endl;
     return 0;
 }
