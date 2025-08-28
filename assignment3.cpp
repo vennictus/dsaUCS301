@@ -145,37 +145,91 @@
 
 // Question 3
 
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// bool isBalanced(string expr) {
+//     stack<char> s;
+//     for (char c : expr) {
+//         if (c == '(' || c == '{' || c == '[') {
+//             s.push(c);
+//         } else if (c == ')' || c == '}' || c == ']') {
+//             if (s.empty()) return false;
+//             char top = s.top();
+//             s.pop();
+//             if ((c == ')' && top != '(') ||
+//                 (c == '}' && top != '{') ||
+//                 (c == ']' && top != '[')) {
+//                 return false;
+//             }
+//         }
+//     }
+//     return s.empty();
+// }
+
+// int main() {
+//     string expr;
+//     cout << "Enter an expression: ";
+//     cin >> expr;
+//     if (isBalanced(expr))
+//         cout << "Balanced" << endl;
+//     else
+//         cout << "Not Balanced" << endl;
+//     return 0;
+// }
+
+// ===================================================================================================
+
+//Question 4
+
 #include <iostream>
 #include <stack>
 #include <string>
 using namespace std;
 
-bool isBalanced(string expr) {
+int precedence(char op) {
+    if (op == '^') return 3;
+    if (op == '*' || op == '/') return 2;
+    if (op == '+' || op == '-') return 1;
+    return -1;
+}
+
+string infixToPostfix(string exp) {
     stack<char> s;
-    for (char c : expr) {
-        if (c == '(' || c == '{' || c == '[') {
+    string result;
+    for (char c : exp) {
+        if (isalnum(c)) {
+            result += c;
+        } else if (c == '(') {
             s.push(c);
-        } else if (c == ')' || c == '}' || c == ']') {
-            if (s.empty()) return false;
-            char top = s.top();
-            s.pop();
-            if ((c == ')' && top != '(') ||
-                (c == '}' && top != '{') ||
-                (c == ']' && top != '[')) {
-                return false;
+        } else if (c == ')') {
+            while (!s.empty() && s.top() != '(') {
+                result += s.top();
+                s.pop();
             }
+            s.pop();
+        } else {
+            while (!s.empty() && precedence(s.top()) >= precedence(c)) {
+                result += s.top();
+                s.pop();
+            }
+            s.push(c);
         }
     }
-    return s.empty();
+    while (!s.empty()) {
+        result += s.top();
+        s.pop();
+    }
+    return result;
 }
 
 int main() {
-    string expr;
-    cout << "Enter an expression: ";
-    cin >> expr;
-    if (isBalanced(expr))
-        cout << "Balanced" << endl;
-    else
-        cout << "Not Balanced" << endl;
+    string exp;
+    cout << "Enter infix expression: ";
+    cin >> exp;
+    cout << "Postfix expression: " << infixToPostfix(exp) << endl;
     return 0;
 }
+
