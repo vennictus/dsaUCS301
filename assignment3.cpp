@@ -184,52 +184,85 @@
 
 //Question 4
 
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// int precedence(char op) {
+//     if (op == '^') return 3;
+//     if (op == '*' || op == '/') return 2;
+//     if (op == '+' || op == '-') return 1;
+//     return -1;
+// }
+
+// string infixToPostfix(string exp) {
+//     stack<char> s;
+//     string result;
+//     for (char c : exp) {
+//         if (isalnum(c)) {
+//             result += c;
+//         } else if (c == '(') {
+//             s.push(c);
+//         } else if (c == ')') {
+//             while (!s.empty() && s.top() != '(') {
+//                 result += s.top();
+//                 s.pop();
+//             }
+//             s.pop();
+//         } else {
+//             while (!s.empty() && precedence(s.top()) >= precedence(c)) {
+//                 result += s.top();
+//                 s.pop();
+//             }
+//             s.push(c);
+//         }
+//     }
+//     while (!s.empty()) {
+//         result += s.top();
+//         s.pop();
+//     }
+//     return result;
+// }
+
+// int main() {
+//     string exp;
+//     cout << "Enter infix expression: ";
+//     cin >> exp;
+//     cout << "Postfix expression: " << infixToPostfix(exp) << endl;
+//     return 0;
+
+//===================================================================================================
+
+//Question 5
 #include <iostream>
 #include <stack>
 #include <string>
 using namespace std;
 
-int precedence(char op) {
-    if (op == '^') return 3;
-    if (op == '*' || op == '/') return 2;
-    if (op == '+' || op == '-') return 1;
-    return -1;
-}
-
-string infixToPostfix(string exp) {
-    stack<char> s;
-    string result;
+int evaluatePostfix(string exp) {
+    stack<int> s;
     for (char c : exp) {
-        if (isalnum(c)) {
-            result += c;
-        } else if (c == '(') {
-            s.push(c);
-        } else if (c == ')') {
-            while (!s.empty() && s.top() != '(') {
-                result += s.top();
-                s.pop();
-            }
-            s.pop();
+        if (isdigit(c)) {
+            s.push(c - '0');
         } else {
-            while (!s.empty() && precedence(s.top()) >= precedence(c)) {
-                result += s.top();
-                s.pop();
+            int val2 = s.top(); s.pop();
+            int val1 = s.top(); s.pop();
+            switch (c) {
+                case '+': s.push(val1 + val2); break;
+                case '-': s.push(val1 - val2); break;
+                case '*': s.push(val1 * val2); break;
+                case '/': s.push(val1 / val2); break;
             }
-            s.push(c);
         }
     }
-    while (!s.empty()) {
-        result += s.top();
-        s.pop();
-    }
-    return result;
+    return s.top();
 }
 
 int main() {
     string exp;
-    cout << "Enter infix expression: ";
+    cout << "Enter postfix expression: ";
     cin >> exp;
-    cout << "Postfix expression: " << infixToPostfix(exp) << endl;
+    cout << "Result: " << evaluatePostfix(exp) << endl;
     return 0;
 }
-
