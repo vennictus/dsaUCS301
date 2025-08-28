@@ -156,100 +156,134 @@
 
 // Question 4
 
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main() {
+//     string choice;
+//     do {
+//         cout << "\n--- MENU ---\n";
+//         cout << "1. Reverse Array (R)\n";
+//         cout << "2. Matrix Multiplication (M)\n";
+//         cout << "3. Transpose of Matrix (T)\n";
+//         cout << "4. Exit (E)\n";
+//         cout << "Enter choice: ";
+//         cin >> choice;
+
+//         if (choice == "1" || choice == "R" || choice == "r") {
+//             int arr[100], n;
+//             cout << "Enter number of elements: ";
+//             cin >> n;
+//             cout << "Enter elements: ";
+//             for (int i = 0; i < n; i++) cin >> arr[i];
+//             for (int i = 0, j = n - 1; i < j; i++, j--) {
+//                 int temp = arr[i];
+//                 arr[i] = arr[j];
+//                 arr[j] = temp;
+//             }
+//             cout << "Reversed array: ";
+//             for (int i = 0; i < n; i++) cout << arr[i] << " ";
+//             cout << endl;
+//         } 
+//         else if (choice == "2" || choice == "M" || choice == "m") {
+//             int a[10][10], b[10][10], c[10][10], r1, c1, r2, c2;
+//             cout << "Enter rows and cols of first matrix: ";
+//             cin >> r1 >> c1;
+//             cout << "Enter rows and cols of second matrix: ";
+//             cin >> r2 >> c2;
+
+//             if (c1 != r2) {
+//                 cout << "Matrix multiplication not possible\n";
+//                 continue;
+//             }
+
+//             cout << "Enter first matrix:\n";
+//             for (int i = 0; i < r1; i++)
+//                 for (int j = 0; j < c1; j++)
+//                     cin >> a[i][j];
+
+//             cout << "Enter second matrix:\n";
+//             for (int i = 0; i < r2; i++)
+//                 for (int j = 0; j < c2; j++)
+//                     cin >> b[i][j];
+
+//             for (int i = 0; i < r1; i++)
+//                 for (int j = 0; j < c2; j++) {
+//                     c[i][j] = 0;
+//                     for (int k = 0; k < c1; k++)
+//                         c[i][j] += a[i][k] * b[k][j];
+//                 }
+
+//             cout << "Resultant matrix:\n";
+//             for (int i = 0; i < r1; i++) {
+//                 for (int j = 0; j < c2; j++)
+//                     cout << c[i][j] << " ";
+//                 cout << endl;
+//             }
+//         } 
+//         else if (choice == "3" || choice == "T" || choice == "t") {
+//             int a[10][10], trans[10][10], r, c;
+//             cout << "Enter rows and cols: ";
+//             cin >> r >> c;
+//             cout << "Enter matrix:\n";
+//             for (int i = 0; i < r; i++)
+//                 for (int j = 0; j < c; j++)
+//                     cin >> a[i][j];
+
+//             for (int i = 0; i < r; i++)
+//                 for (int j = 0; j < c; j++)
+//                     trans[j][i] = a[i][j];
+
+//             cout << "Transpose:\n";
+//             for (int i = 0; i < c; i++) {
+//                 for (int j = 0; j < r; j++)
+//                     cout << trans[i][j] << " ";
+//                 cout << endl;
+//             }
+//         } 
+//         else if (choice == "4" || choice == "E" || choice == "e") {
+//             cout << "Exiting...\n";
+//             break;
+//         } 
+//         else {
+//             cout << "Invalid choice, try again.\n";
+//         }
+//     } while (true);
+
+//     return 0;
+// }
+
+//Question 5
+
 #include <iostream>
-#include <string>
 using namespace std;
 
 int main() {
-    string choice;
-    do {
-        cout << "\n--- MENU ---\n";
-        cout << "1. Reverse Array (R)\n";
-        cout << "2. Matrix Multiplication (M)\n";
-        cout << "3. Transpose of Matrix (T)\n";
-        cout << "4. Exit (E)\n";
-        cout << "Enter choice: ";
-        cin >> choice;
+    int a[10][10], r, c;
+    cout << "Enter number of rows and columns: ";
+    cin >> r >> c;
 
-        if (choice == "1" || choice == "R" || choice == "r") {
-            int arr[100], n;
-            cout << "Enter number of elements: ";
-            cin >> n;
-            cout << "Enter elements: ";
-            for (int i = 0; i < n; i++) cin >> arr[i];
-            for (int i = 0, j = n - 1; i < j; i++, j--) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-            cout << "Reversed array: ";
-            for (int i = 0; i < n; i++) cout << arr[i] << " ";
-            cout << endl;
-        } 
-        else if (choice == "2" || choice == "M" || choice == "m") {
-            int a[10][10], b[10][10], c[10][10], r1, c1, r2, c2;
-            cout << "Enter rows and cols of first matrix: ";
-            cin >> r1 >> c1;
-            cout << "Enter rows and cols of second matrix: ";
-            cin >> r2 >> c2;
+    cout << "Enter elements:\n";
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            cin >> a[i][j];
 
-            if (c1 != r2) {
-                cout << "Matrix multiplication not possible\n";
-                continue;
-            }
+    cout << "Row sums:\n";
+    for (int i = 0; i < r; i++) {
+        int sum = 0;
+        for (int j = 0; j < c; j++)
+            sum += a[i][j];
+        cout << "Row " << i + 1 << " sum = " << sum << endl;
+    }
 
-            cout << "Enter first matrix:\n";
-            for (int i = 0; i < r1; i++)
-                for (int j = 0; j < c1; j++)
-                    cin >> a[i][j];
-
-            cout << "Enter second matrix:\n";
-            for (int i = 0; i < r2; i++)
-                for (int j = 0; j < c2; j++)
-                    cin >> b[i][j];
-
-            for (int i = 0; i < r1; i++)
-                for (int j = 0; j < c2; j++) {
-                    c[i][j] = 0;
-                    for (int k = 0; k < c1; k++)
-                        c[i][j] += a[i][k] * b[k][j];
-                }
-
-            cout << "Resultant matrix:\n";
-            for (int i = 0; i < r1; i++) {
-                for (int j = 0; j < c2; j++)
-                    cout << c[i][j] << " ";
-                cout << endl;
-            }
-        } 
-        else if (choice == "3" || choice == "T" || choice == "t") {
-            int a[10][10], trans[10][10], r, c;
-            cout << "Enter rows and cols: ";
-            cin >> r >> c;
-            cout << "Enter matrix:\n";
-            for (int i = 0; i < r; i++)
-                for (int j = 0; j < c; j++)
-                    cin >> a[i][j];
-
-            for (int i = 0; i < r; i++)
-                for (int j = 0; j < c; j++)
-                    trans[j][i] = a[i][j];
-
-            cout << "Transpose:\n";
-            for (int i = 0; i < c; i++) {
-                for (int j = 0; j < r; j++)
-                    cout << trans[i][j] << " ";
-                cout << endl;
-            }
-        } 
-        else if (choice == "4" || choice == "E" || choice == "e") {
-            cout << "Exiting...\n";
-            break;
-        } 
-        else {
-            cout << "Invalid choice, try again.\n";
-        }
-    } while (true);
+    cout << "Column sums:\n";
+    for (int j = 0; j < c; j++) {
+        int sum = 0;
+        for (int i = 0; i < r; i++)
+            sum += a[i][j];
+        cout << "Column " << j + 1 << " sum = " << sum << endl;
+    }
 
     return 0;
 }
