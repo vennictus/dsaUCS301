@@ -14,7 +14,7 @@
 
 ## **Included Lab Assignments**
 
-### **• Lab Assignment 1 – Arrays**
+### **• Lab Assignment 1 & 2– Arrays**
 
 ### **• Lab Assignment 3 – Stack**
 
